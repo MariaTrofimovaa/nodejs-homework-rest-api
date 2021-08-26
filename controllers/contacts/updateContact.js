@@ -8,6 +8,7 @@ const updateContact = async (req, res, next) => {
     const error = createError(404, `Contact with id = ${contactId} not found`);
     throw error;
   }
+
   res.json({
     status: "success",
     code: 200,
@@ -17,3 +18,4 @@ const updateContact = async (req, res, next) => {
   });
 };
 module.exports = updateContact;
+

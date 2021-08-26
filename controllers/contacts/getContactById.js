@@ -1,4 +1,3 @@
-// const createError = require("http-errors");
 const { NotFound } = require("http-errors");
 const { contacts: service } = require("../../services");
 
@@ -8,7 +7,7 @@ const getContactById = async (req, res, next) => {
   if (!result) {
     // const error = createError(404, `Contact with id = ${contactId} not found`);
     // throw error;
-    throw new NotFound(`Author with id=${id} not found`);
+    throw new NotFound(`Contact with id=${id} not found`);
   }
 
   res.json({
@@ -19,4 +18,5 @@ const getContactById = async (req, res, next) => {
     },
   });
 };
+
 module.exports = getContactById;
