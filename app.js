@@ -4,13 +4,14 @@ const logger = require("morgan");
 const cors = require("cors"); // кросдоменные запросы
 require("dotenv").config(); // чтобы содержимое файла env добавилось в переменную окружения
 
-const api = require("./routes/api");
-
 const app = express(); //создаем сервер
 
 app.use(cors()); // испоьзуем мидлвару, чтобы появились кроссдоменные запросы
 
-app.use(express.json()); // чтобы put и patch запросы считывались
+
+app.use(logger(formatsLogger));
+app.use(cors());
+app.use(express.json()); // чтобы пут и патч запросы считывались
 
 app.use("/api/v1/users", api.users);
 app.use("/api/v1/contacts", api.contacts);
@@ -42,6 +43,7 @@ const { DB_HOST, PORT = 3000 } = process.env; // импортируем стро
 // первый аргумент - строка подключения
 // второй - объект с настройками подключения
 
+
 mongoose
   .connect(DB_HOST, {
     useNewUrlParser: true,
@@ -56,3 +58,4 @@ mongoose
   .catch((error) => console.log(error));
 
 module.exports = app;
+

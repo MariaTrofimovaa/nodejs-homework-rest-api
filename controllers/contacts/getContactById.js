@@ -1,4 +1,5 @@
 // const createError = require("http-errors");
+
 const { NotFound } = require("http-errors");
 const { contacts: service } = require("../../services");
 
@@ -10,6 +11,7 @@ const getContactById = async (req, res, next) => {
     // throw error;
     throw new NotFound(`Contact with id=${id} not found`);
   }
+
   res.json({
     status: "success",
     code: 200,
