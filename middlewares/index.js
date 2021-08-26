@@ -3,5 +3,5 @@ const authentificate = require("./authentificate")
 
 module.exports = {
   validation,
-  authentificate,
+  authentificate
 };
