@@ -1,39 +1,48 @@
-const mongoose = require("mongoose"); // добавила
-const express = require("express");
+const mongoose = require("mongoose"); // для подключения к базе
+const express = require("express"); // создание роутинга
 const logger = require("morgan");
-const cors = require("cors");
-require("dotenv").config(); // добавила, чтобы содержимое файла envдобавилось в переменную окружения
+const cors = require("cors"); // кросдоменные запросы
+require("dotenv").config(); // чтобы содержимое файла env добавилось в переменную окружения
 
-const api = require("./api");
+const app = express(); //создаем сервер
 
-// const contactsRouter = require("./routes/api/contacts");
+app.use(cors()); // испоьзуем мидлвару, чтобы появились кроссдоменные запросы
 
-
-const app = express();
-
-const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json()); // чтобы пут и патч запросы считывались
 
+app.use("/api/v1/users", api.users);
 app.use("/api/v1/contacts", api.contacts);
 
-//обработчики ошибок:
+// пишем обработчик несуществующих запроосов:
 app.use((_, res) => {
-  res.status(404).json({
+  res.status(404).send({
     status: "error",
     code: 404,
     message: "Not found",
   });
 });
 
-app.use((err, _, res, __) => {
-  res.status(500).json({ message: err.message });
+// пишем обработчик ошибок
+
+app.use((error, _, res, __) => {
+  const { code = 500, message = "Server error" } = error;
+  res.status(code).json({
+    status: "error",
+    code,
+    message,
+  });
 });
 
 // подключаем DB_HOST
-const { DB_HOST, PORT = 3000 } = process.env;
+const { DB_HOST, PORT = 3000 } = process.env; // импортируем строку подключчения
+
+// подключаемся к базе данных mongoose connect
+// первый аргумент - строка подключения
+// второй - объект с настройками подключения
+
 
 mongoose
   .connect(DB_HOST, {
@@ -44,8 +53,9 @@ mongoose
   })
   .then(async () => {
     console.log("Database connection successful");
-    app.listen(PORT);
+    app.listen(PORT); // запускаем сервер
   })
   .catch((error) => console.log(error));
 
-// module.exports = app;
+module.exports = app;
+
