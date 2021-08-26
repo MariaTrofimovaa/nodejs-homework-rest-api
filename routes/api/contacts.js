@@ -1,20 +1,16 @@
-const express = require("express");
+const express = require("express"); // чтобы создать маршруты
 const router = express.Router();
 
+const { ctrlWrapper } = require("../../helpers");
 const { contacts: ctrl } = require("../../controllers");
-const {
-  validateContact,
-  validateUpdateContact,
-} = require("../../middlewares/validateContact");
+const { joiSchema } = require("../../models/schemas/contact");
+const { validation } = require("../../middlewares");
 
-router.get("/", ctrl.listContacts);
-
-router.get("/:contactId", ctrl.getContactById);
-
-router.post("/", validateContact, ctrl.addContact);
-
-router.patch("/:contactId", validateUpdateContact, ctrl.updateContact);
-
-router.delete("/:contactId", ctrl.removeContact);
+router.get("/", ctrl.listContacts); // работает при залогиненом пользователе
+router.get("/:contactId", ctrlWrapper(ctrl.getContactById));
+router.post("/", validation(joiSchema), ctrl.addContact); // добавляет при залогиненом пользователе
+router.put("/:contactId", ctrlWrapper(ctrl.updateContact));
+router.patch("/:contactId/favorite", ctrlWrapper(ctrl.updateField));
+router.delete("/:contactId", ctrlWrapper(ctrl.removeContact));
 
 module.exports = router;
