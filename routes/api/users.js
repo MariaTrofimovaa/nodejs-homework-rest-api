@@ -1,7 +1,11 @@
 const express = require("express");
 
 const { auth: ctrl } = require("../../controllers");
-const { validation, authentificate } = require("../../middlewares");
+const {
+  validation,
+  authentificate,
+  uploadMiddleware,
+} = require("../../middlewares");
 const {
   user: { joiSchema },
 } = require("../../models/schemas");
@@ -25,5 +29,15 @@ router.get("/current", authentificate, ctrl.getCurrentUser);
 // ***** 4.
 // пользователь разлогинивается
 router.get("/logout", authentificate, ctrl.logout);
+
+// ***** 5. 
+// http://localhost:3000/api/v1/users/avatars
+
+router.patch(
+  '/avatars',
+  authentificate,
+  uploadMiddleware.single('avatar'),
+  ctrl.uploadAvatar
+); 
 
 module.exports = router;

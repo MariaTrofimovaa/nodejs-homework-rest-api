@@ -2,7 +2,7 @@ const { User } = require("../models");
 
 const getOne = (filter) => {
   return User.findOne(filter);
-};
+}; 
 
 const getById = (id) => User.findById(id);
 
