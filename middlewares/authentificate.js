@@ -1,3 +1,4 @@
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { users: service } = require("../services");
 
@@ -27,9 +28,10 @@ const authentificate = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    error.status = 401;
-    error.message = "Not authorized*";
-    next(error);
+    //  console.log(error);
+     error.status = 401;
+     error.message = "Not authorized*";
+     next(error);
   }
 };
 

@@ -27,6 +27,11 @@ const userSchema = Schema({
     type: String,
     default: null,
   },
+  // avatarURL: String,
+  avatarURL: {
+    name: String,
+    avatar: String,
+  },
 });
 
 // хеширование пароля с помощью bcryptjs
