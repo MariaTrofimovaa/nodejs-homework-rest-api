@@ -9,7 +9,7 @@ const verifyEmail = async (req, res, next) => {
       return res.status(404).json({
         status: "error",
         code: 404,
-        message: "Not found",
+        message: "Not found***",
       });
     }
     // если юзер есть - обновляем юзера и подтверждаем что он верифицирован

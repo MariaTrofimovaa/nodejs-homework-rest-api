@@ -1,6 +1,7 @@
 const gravatar = require("gravatar");
 const { users: service } = require("../../services");
 const { sendEmail } = require("../../utils");
+const { nanoid } = require("nanoid");
 
 const signup = async (req, res, next) => {
   try {
@@ -25,7 +26,9 @@ const signup = async (req, res, next) => {
     //   next(error);
     // }
 
-    const verifyToken = "asdf*gsdhdsd!dfedf"; // создаем токен верификации
+    // const verifyToken = "asdf*gsdhdsd!dfedf"; // создаем токен верификации
+    const verifyToken = nanoid();
+    // console.log(verifyToken);
     const userData = await service.add({ ...req.body, verifyToken }); // записываем токен в базу человеку, который регистрируется
 
     const { URL } = process.env;
