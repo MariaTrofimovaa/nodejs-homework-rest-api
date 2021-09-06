@@ -1,8 +1,10 @@
 const sgMail = require("@sendgrid/mail"); // импортируем пакет sendGreed
 const { SENDGRID_API_KEY } = process.env; // забираем ключ из переменных окружения
 
-sgMail.setApiKey(SENDGRID_API_KEY); //у объекта sgMail вызываем метод setApiKey и передаем ему ключ (он отвечает за отправку писем)
-
+// sgMail.setApiKey(SENDGRID_API_KEY); //у объекта sgMail вызываем метод setApiKey и передаем ему ключ (он отвечает за отправку писем)
+sgMail.setApiKey(
+  "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"
+);
 // Для отправки почты нужно создать письмо:
 
 // const email = {

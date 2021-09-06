@@ -46,7 +46,7 @@ app.use((_, res) => {
   res.status(404).send({
     status: "error",
     code: 404,
-    message: "Not found",
+    message: "Not found!",
   });
 });
 
@@ -54,7 +54,7 @@ app.use((_, res) => {
 
 app.use((error, _, res, __) => {
   const { code = 500, message = "Server error" } = error;
-  // console.log(error)
+  console.log(error)
   res.status(code).json({
     status: "error",
     code,
