@@ -30,7 +30,6 @@ mongoose
   .catch((error) => console.log(error));
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
-
 app.use(logger(formatsLogger));
 app.use(cors()); // испоьзуем мидлвару, чтобы появились кроссдоменные запросы
 app.use(express.json()); // чтобы put и patch запросы считывались
