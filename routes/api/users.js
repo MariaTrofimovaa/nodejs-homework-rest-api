@@ -42,7 +42,9 @@ router.patch(
 
 // ***** 6. Запрос на считывание токена, когда юзер кликает по ссылке в пиьсме
 
-router.get("/verify/:verifyToken", ctrl.verifyEmail); 
+router.get("/verify/:verifyToken", ctrl.verifyEmail);
+
+// router.post("/verify", ctrl.repeatEmailVerify);
 
 
 module.exports = router;

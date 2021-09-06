@@ -1,6 +1,7 @@
 const { Schema } = require("mongoose");
 const Joi = require("joi");
 const bcrypt = require("bcryptjs"); // для хеширования пароля
+const { nanoid } = require("nanoid");
 
 const emailRegex =
   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
@@ -40,6 +41,7 @@ const userSchema = Schema({
   verifyToken: {
     type: String,
     required: [true, "Verify token is required"],
+    default: nanoid(),
   },
 });
 

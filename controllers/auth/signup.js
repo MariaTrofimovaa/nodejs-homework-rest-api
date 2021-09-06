@@ -34,7 +34,7 @@ const signup = async (req, res, next) => {
     const emailToSend = {
       to: userData.email,
       subject: "Verify email",
-      html: `<a href="${URL}/api/v1/auth//verify/${verifyToken}" target="_blank">Please verify your email<a/>`,
+      html: `<a href="${URL}/api/v1/auth/verify/${verifyToken}" target="_blank">Please verify your email<a/>`,
     };
 
     await sendEmail(emailToSend); //отправляем письмо юзеру
