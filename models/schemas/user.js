@@ -32,6 +32,15 @@ const userSchema = Schema({
     name: String,
     avatar: String,
   },
+  // будет true, если подтвердили email и false, если email не подтвердили
+  verify: {
+    type: Boolean,
+    default: false,
+  },
+  verifyToken: {
+    type: String,
+    required: [true, "Verify token is required"],
+  },
 });
 
 // хеширование пароля с помощью bcryptjs

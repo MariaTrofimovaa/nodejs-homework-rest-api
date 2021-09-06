@@ -38,6 +38,11 @@ router.patch(
   authentificate,
   uploadMiddleware.single('avatar'),
   ctrl.uploadAvatar
-); 
+);
+
+// ***** 6. Запрос на считывание токена, когда юзер кликает по ссылке в пиьсме
+
+router.get("/verify/:verifyToken", ctrl.verifyEmail); 
+
 
 module.exports = router;
